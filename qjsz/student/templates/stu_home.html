@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>信息管理</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script href="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a  href="{% url 'stu_home' %}" class="navbar-brand">学 生 信 息 管 理 系 统</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'stu_maker_student' request.session.stu_id%}">{{ request.session.stu_id }}个人信息查看</a></li>
+        <li class="dropdown">
+          <a href="{% url 'show' %}">注销 </a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+  <a href="#" class="list-group-item active">
+    系统管理栏
+  </a>
+{#  <a href="{% url 'tea_maker_teacher' %}" class="list-group-item">个人信息查看</a>#}
+{#  <a href="{% url 'tea_maker_student' %}" class="list-group-item">学生信息查看</a>#}
+{#  <a href="{% url 'tea_department' %}" class="list-group-item">院系查看</a>#}
+  <a href="{% url 'stu_major' %}" class="list-group-item">专业查看</a>
+  <a href="{% url 'stu_classes' %}" class="list-group-item">全部课程查看</a>
+  <a href="{% url 'stu_classes_self' request.session.stu_id%}" class="list-group-item">自己课程查看</a>
+
+
+</div>
+        </div>
+        <div class="col-md-9">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">详细信息查看</h3>
+              </div>
+              <div class="panel-body">
+                  {% block content%}
+                    <div class="jumbotron">
+                      <h1>Hello, 学生!</h1>
+                      <p>欢迎来到学生信息管理</p>
+{#                      <p><a class="btn btn-primary btn-lg" href="#" role="button"></a></p>#}
+                    </div>
+                  {% endblock %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

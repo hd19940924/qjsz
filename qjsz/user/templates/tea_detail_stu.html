@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    <h1 class="text-center">学生信息详情</h1>
+    <form action="" method="POST">
+        <p>学号:
+            {{ student_obj.stu_id }}
+        </p>
+        <p>学生姓名:
+           {{ student_obj.stu_name }}
+        </p>
+        <p>学生性别:
+            {{ student_obj.stu_sex }}
+        </p>
+        <p>学生手机号:
+            {{ student_obj.stu_phone }}
+        </p>
+        <p>学生地址:
+           {{ student_obj.stu_address }}
+        </p>
+        <p>出生日期:
+            {{ student_obj.stu_birthday |date:'Y-m-d' }}
+        </p>
+
+        <p>学生院系:
+            {% for department_obj in department_queryset %}
+                {% if student_obj.department_id == department_obj.id %}
+                    {{ department_obj.dm_name }}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>学生专业:
+            {% for major_obj in major_queryset %}
+                {% if major_obj.id == student_obj.stu_major_id %}
+                   {{ major_obj.major_name }}
+                {% endif %}
+            {% endfor %}
+        </p>
+        <p>学生课程:
+        {% for major_obj in major_queryset %}
+            {% if student_obj.stu_major_id == major_obj.id %}
+                {% for classes_obj in classes_queryset %}
+                    {% if major_obj.id == classes_obj.major_id %}
+                        {{ classes_obj.classes_name }},
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        </p>
+{#        <p>学生课程#}
+{#            <input type="text" name = "stu_class_id" class="form-control">#}
+{#        </p>#}
+             <a href="{% url 'maker_student' %}" class="btn btn-danger btn-block">返回</a>
+
+    </form>
+{% endblock %}

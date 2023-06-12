@@ -1,0 +1,40 @@
+{% extends 'tea_home.html' %}
+
+{% block content %}
+{#    <a href="{% url 'add_teacher' %}" class="btn btn-danger">添加</a>#}
+
+    <br>
+    <table class="table table-hover table-striped" style="border: 1px black">
+        <thead>
+            <tr>
+                <th>教师号</th>
+                <th>教师姓名</th>
+{#                <th>教师年龄</th>#}
+                <th>教师性别</th>
+{#                <th>备注</th>#}
+                <th>密码</th>
+                <th>修改密码</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td>{{ teacher_obj.userid }}</td>
+                <td>{{ teacher_obj.username }}</td>
+{#                <td>{{ teacher_obj.age }}</td>#}
+                <td>{{ teacher_obj.usersex }}</td>
+{#                <td>{{ teacher_obj.other }}</td>#}
+                <td>{{ teacher_obj.password }}</td>
+                <td>
+                    <a href="{% url 'tea_edit' teacher_obj.userid %}" class="btn btn-primary btn-xs">修改密码</a>
+{#                    <a href="#" class="btn btn-primary btn-xs">删除</a>#}
+                </td>
+            </tr>
+
+
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

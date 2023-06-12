@@ -1,0 +1,27 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    <h1 class="text-center">教师信息编辑</h1>
+    <form action="" method="POST">
+        <p>教师号
+            <input type="text" name = "userid" class="form-control" value="{{ user_obj.userid }}">
+            <span style="color: red">{{ msg }}</span>
+        </p>
+        <p>教师姓名
+            <input type="text" name = "username" class="form-control" value="{{ user_obj.username }}">
+        </p>
+        <p>教师登录密码
+            <input type="text" name = "age" class="form-control" value="{{ user_obj.password }}">
+        </p>
+        <p>教师性别
+            <input type="text" name = "usersex" class="form-control" value="{{ user_obj.usersex }}">
+        </p>
+        <p>备注
+            <input type="text" name = "other" class="form-control" value="{{ user_obj.other }}">
+        </p>
+            <input type="submit" class="btn btn-danger btn-block" value="编辑">
+            <a href="{% url 'maker_teacher' %}" class="btn btn-danger btn-block">返回</a>
+
+    </form>
+{% endblock %}

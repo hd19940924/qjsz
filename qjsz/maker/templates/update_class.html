@@ -1,0 +1,27 @@
+{% extends 'home.html' %}
+
+{% block content %}
+     <h1 class="text-center">课程信息编辑</h1>
+    <form action="" method="POST">
+        <p>课程名称
+            <input type="text" name = "classes_name" class="form-control" value="{{ classes_obj.classes_name }}">
+{#            <span style="color: red">{{ msg }}</span>#}
+        </p>
+        <p>代课老师
+            <input type="text" name = "classes_teacher" class="form-control" value="{{ classes_obj.classes_teacher }}">
+        </p>
+        <p>所属专业
+            <select name="major">
+            {% for major_obj in major_queryset %}
+                {% if major_obj.id == classes_obj.major_id %}
+                    <option value= "{{ major_obj.id }}" selected>{{ major_obj.major_name }}</option>
+                {% else %}
+                    <option value= "{{ major_obj.id }}">{{ major_obj.major_name }}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+        </p>
+        <input type="submit" class="btn btn-danger btn-block" value="编辑" >
+    <a href="{% url 'classes' %}" class="btn btn-danger btn-block">返回</a>
+    </form>
+{% endblock %}

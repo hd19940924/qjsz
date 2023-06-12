@@ -1,0 +1,55 @@
+{% extends 'stu_home.html' %}
+
+{% block content %}
+
+    <table class="table table-hover table-striped" style="border: 1px black">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>手机号</th>
+                <th>地址</th>
+                <th>出生日期</th>
+                <th>院系</th>
+                <th>专业</th>
+                <th>密码</th>
+                <th>修改密码</th>
+            </tr>
+        </thead>
+        <tbody>
+        <tr>
+                <td>{{ student_obj.stu_id }}</td>
+                <td>{{ student_obj.stu_name }}</td>
+                <td>{{ student_obj.stu_sex }}</td>
+                <td>{{ student_obj.stu_phone }}</td>
+                <td>{{ student_obj.stu_address }}</td>
+                <td>{{ student_obj.stu_birthday | date:'Y-m-d' }}</td>
+                {% for department_obj in department_queryset %}
+                    {% if department_obj.id == student_obj.department_id %}
+                        <td>{{ department_obj.dm_name }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for major_obj in major_queryset %}
+                    {% if major_obj.id == student_obj.stu_major_id %}
+                        <td>{{ major_obj.major_name }}</td>
+                    {% endif %}
+                {% endfor %}
+{#                {% for classes_obj in classes_queryset %}#}
+{#                    {% if student_obj.stu_major_id == classes_obj.major_id %}#}
+{#                        {% if classes_obj.isdeleted == 0 %}#}
+{#                            <td>{{ classes_obj.classes_name }}</td>#}
+{#                        {% endif %}#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+                <td>{{ student_obj.password }}</td>
+                <th>
+                    <a href="{% url 'stu_edit' student_obj.stu_id%}" class="btn btn-primary btn-xs">修改密码</a>
+                </th>
+            </tr>
+
+
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends 'tea_home.html' %}
+
+{% block content %}
+    <form class="navbar-form navbar-left" method="POST" action="{% url 'tea_classes' %}">
+        <div class="form-group">
+            <a href="{% url 'tea_add_classes' %}" class="btn btn-danger">添加</a>
+            {% if classes_obj %}
+                <input type="text" class="form-control" name="classes_name1" placeholder="请输入你要查找的课程名称" value="{{ classes_obj.classes.name }}">
+            {% else %}
+                <input type="text" class="form-control" name="classes_name1" placeholder="请输入你要查找的课程名称">
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-default">查找</button>
+        <span style="color: red">{{ errmsg }}</span>
+    </form>
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>课程名称</th>
+                <th>代课老师</th>
+                <th>所属专业</th>
+                <th>操作</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% if classes_queryset %}
+            {% for classes_obj in classes_queryset %}
+                {% if classes_obj.isdeleted == 0 %}
+                    <tr>
+                        <td>{{ classes_obj.classes_name }}</td>
+                        <td>{{ classes_obj.classes_teacher }}</td>
+                        {% for major_obj in major_queryset %}
+                            {% if major_obj.id == classes_obj.major_id %}
+                                <td>{{ major_obj.major_name }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        <th>
+                            <a href="{% url 'tea_update_class' classes_obj.id %}" class="btn btn-primary btn-xs">编辑</a>
+                            <a href="{% url 'tea_delete_class' classes_obj.id %}" class="btn btn-primary btn-xs">删除</a>
+                        </th>
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+        {% else %}
+            {% if classes_obj.isdeleted == 0 %}
+                    <tr>
+                        <td>{{ classes_obj.classes_name }}</td>
+                        <td>{{ classes_obj.classes_teacher }}</td>
+                        {% for major_obj in major_queryset %}
+                            {% if major_obj.id == classes_obj.major_id %}
+                                <td>{{ major_obj.major_name }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        <th>
+                            <a href="{% url 'tea_update_class' classes_obj.id %}" class="btn btn-primary btn-xs">编辑</a>
+                            <a href="{% url 'tea_delete_class' classes_obj.id %}" class="btn btn-primary btn-xs">删除</a>
+                        </th>
+                    </tr>
+                {% endif %}
+        {% endif %}
+
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'stu_home.html' %}
+
+{% block content %}
+    <table class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>专业名称</th>
+                <th>负责人</th>
+                <th>所属院系</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if major_queryset %}
+            {% for major_obj in major_queryset %}
+            {% if major_obj.isdeleted == 0 %}
+             <tr>
+                <td>{{ major_obj.major_name }}</td>
+                <td>{{ major_obj.major_teacher }}</td>
+                {% for department_obj in department_queryset %}
+                    {% if major_obj.department_id == department_obj.id %}
+                        <td>{{department_obj.dm_name}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endif %}
+            {% endfor %}
+        {% else %}
+            {% if major_obj.isdeleted == 0 %}
+             <tr>
+                <td>{{ major_obj.major_name }}</td>
+                <td>{{ major_obj.major_teacher }}</td>
+                {% for department_obj in department_queryset %}
+                    {% if major_obj.department_id == department_obj.id %}
+                            <td>{{department_obj.dm_name}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+            {% endif %}
+
+        {% endif %}
+
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

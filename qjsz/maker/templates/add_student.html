@@ -1,0 +1,54 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+    <h1 class="text-center">学生信息添加</h1>
+    <form action="" method="POST">
+        <p>学号
+            <input type="text" name = "stu_id" class="form-control">
+        </p>
+        <span style="color: red">{{ msg }}</span>
+        <p>学生姓名
+            <input type="text" name = "stu_name" class="form-control">
+        </p>
+        <p>学生性别
+            <input type="text" name = "stu_sex" class="form-control">
+        </p>
+        <p>学生手机号
+            <input type="text" name = "stu_phone" class="form-control">
+        </p>
+        <p>学生地址
+            <input type="text" name = "stu_address" class="form-control">
+        </p>
+        <p>出生日期
+            <input type="date" name = "stu_birthday" class="form-control">
+        </p>
+
+        <p>学生院系
+            <select name="deparment_id">
+            {% for department_obj in department_queryset %}
+                {% if department_obj.isdeleted == 0 %}
+                    <option value= "{{ department_obj.id }}">{{ department_obj.dm_name }}</option>
+                {% endif %}
+
+
+            {% endfor %}
+            </select>
+            学生专业
+            <select name="major_id">
+                {% for major_obj in major_queryset %}
+                    {% if major_obj.isdeleted == 0 %}
+                        <option value= "{{ major_obj.id }}">{{ major_obj.major_name }}</option>
+                    {% endif %}
+
+                {% endfor %}
+            </select>
+        </p>
+{#        <p>学生课程#}
+{#            <input type="text" name = "stu_class_id" class="form-control">#}
+{#        </p>#}
+             <input type="submit" class="btn btn-danger btn-block" value="添加">
+            <a href="{% url 'maker_student' %}" class="btn btn-danger btn-block">返回</a>
+
+    </form>
+{% endblock %}

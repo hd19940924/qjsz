@@ -1,0 +1,13 @@
+{% extends 'home.html' %}
+
+{% block content %}
+     <h1 class="text-center">个人密码修改</h1>
+    <form action="" method="POST">
+        <p>管理员密码
+            <input type="text" name = "password" class="form-control" value="{{ maker_obj.password }}">
+
+        </p>
+            <input type="submit" class="btn btn-danger btn-block" value="修改" >
+    <a href="{% url 'home' %}" class="btn btn-danger btn-block">返回</a>
+    </form>
+{% endblock %}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录界面</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+    <style>
+        .chess{
+            width: 200px;
+            margin-bottom: 20px;
+        }
+    </style>
+
+
+</head>
+
+<body>
+<form action="" method="POST">
+    <div class="bigBox">
+        <h1>学 生 信 息 管 理 系 统</h1>
+        <div id="panel">
+            <div class="panel-header">
+                <h2>登录</h2>
+            </div>
+            <div class="panel-content">
+                <div class="chess"><p>
+                    <input type="radio" name="seltype" value="管理员">管理员
+                    <input type="radio" name="seltype" value="教师">教师
+                    <input type="radio" name="seltype" value="学生">学生
+                    </p></div>
+                <div class="user-pwd">
+                    <input placeholder="请输入用户名" name="username" id="username" value="{{ username }}">
+                </div>
+                <div class="user-pwd">
+                    <input placeholder="请输入密码" type="password" name="password" id="password" value="{{ password }}">
+                </div>
+
+                    <span style="color: red">{{ errmsg }}</span>
+                <div class="setting">
+                    <a href="#" class="pull-right">忘记密码?</a>
+                </div>
+                <input type="submit" class="login-btn" value="登录">
+{#                <button class="login-btn" id="btn">登录</button>#}
+
+            </div>
+        </div>
+    </div>
+</form>
+
+
+</body>
+
+</html>

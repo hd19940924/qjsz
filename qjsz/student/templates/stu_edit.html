@@ -1,0 +1,13 @@
+{% extends 'stu_home.html' %}
+
+{% block content %}
+     <h1 class="text-center">个人密码修改</h1>
+    <form action="" method="POST">
+        <p>学生密码
+            <input type="text" name = "password" class="form-control" value="{{ student_obj.password }}">
+            <span style="color: red">{{ s }}</span>
+        </p>
+            <input type="submit" class="btn btn-danger btn-block" value="修改" >
+            <a href="{% url 'stu_home' %}" class="btn btn-danger btn-block">返回</a>
+    </form>
+{% endblock %}

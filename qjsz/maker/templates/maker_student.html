@@ -1,0 +1,107 @@
+{% extends 'home.html' %}
+{% block contents %}
+
+ <a href="{% url 'home' %}" class="list-group-item ">
+    系统管理栏
+  </a>
+  <a href="{% url 'maker_student' %}" class="list-group-item active">学生信息查看</a>
+  <a href="{% url 'maker_teacher' %}" class="list-group-item">教师信息查看</a>
+  <a href="{% url 'department' %}" class="list-group-item">院系查看</a>
+  <a href="{% url 'major' %}" class="list-group-item">专业查看</a>
+  <a href="{% url 'classes' %}" class="list-group-item ">课程查看</a>
+                {% endblock %}
+{% block content %}
+    <form class="navbar-form navbar-left" method="POST" action="{% url 'maker_student' %}">
+        <div class="form-group">
+            <a href="{% url 'add_student' %}" class="btn btn-danger">添加</a>
+            {% if student_obj %}
+                <input type="text" class="form-control" name="stu_id1" placeholder="请输入你要查找的学号" value="{{ student_obj.stu_id }}">
+            {% else %}
+                <input type="text" class="form-control" name="stu_id1" placeholder="请输入你要查找的学号">
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-default">查找</button>
+        <span style="color: red">{{ errmsg }}</span>
+    </form>
+
+    <br>
+    <table class="table table-hover table-striped" style="border: 1px black">
+        <thead>
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>手机号</th>
+                <th>地址</th>
+                <th>出生日期</th>
+                <th>院系</th>
+                <th>专业</th>
+                <th>密码</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% if student_queryset %}
+            {% for student_obj in student_queryset %}
+            {% if student_obj.isdeleted == 0 %}
+                <tr>
+                <td>{{ student_obj.stu_id }}</td>
+                <td>{{ student_obj.stu_name }}</td>
+                <td>{{ student_obj.stu_sex }}</td>
+                <td>{{ student_obj.stu_phone }}</td>
+                <td>{{ student_obj.stu_address }}</td>
+                <td>{{ student_obj.stu_birthday | date:'Y-m-d' }}</td>
+                {% for department_obj in department_queryset %}
+                    {% if department_obj.id == student_obj.department_id %}
+                        <td>{{ department_obj.dm_name }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for major_obj in major_queryset %}
+                    {% if major_obj.id == student_obj.stu_major_id %}
+                        <td>{{ major_obj.major_name }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ student_obj.password }}</td>
+                <th>
+                    <a href="{% url 'detail_stu' student_obj.stu_id%}" class="btn btn-primary btn-xs">详情</a>
+                    <a href="{% url 'update_stu' student_obj.stu_id %}" class="btn btn-primary btn-xs">编辑</a>
+                    <a href="{% url 'delete_stu' student_obj.stu_id%}" class="btn btn-primary btn-xs">删除</a>
+                </th>
+            </tr>
+            {% endif %}
+        {% endfor %}
+        {% else %}
+            {% if student_obj.isdeleted == 0 %}
+                <tr>
+                <td>{{ student_obj.stu_id }}</td>
+                <td>{{ student_obj.stu_name }}</td>
+                <td>{{ student_obj.stu_sex }}</td>
+                <td>{{ student_obj.stu_phone }}</td>
+                <td>{{ student_obj.stu_address }}</td>
+                <td>{{ student_obj.stu_birthday | date:'Y-m-d' }}</td>
+                {% for department_obj in department_queryset %}
+                    {% if department_obj.id == student_obj.department_id %}
+                        <td>{{ department_obj.dm_name }}</td>
+                    {% endif %}
+                {% endfor %}
+                {% for major_obj in major_queryset %}
+                    {% if major_obj.id == student_obj.stu_major_id %}
+                        <td>{{ major_obj.major_name }}</td>
+                    {% endif %}
+                {% endfor %}
+                <td>{{ student_obj.password }}</td>
+                <th>
+                    <a href="{% url 'detail_stu' student_obj.stu_id%}" class="btn btn-primary btn-xs">详情</a>
+                    <a href="{% url 'update_stu' student_obj.stu_id %}" class="btn btn-primary btn-xs">编辑</a>
+                    <a href="{% url 'delete_stu' student_obj.stu_id%}" class="btn btn-primary btn-xs">删除</a>
+                </th>
+            </tr>
+            {% endif %}
+        {% endif %}
+
+
+        </tbody>
+
+    </table>
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'home.html' %}
+
+{% block content %}
+     <h1 class="text-center">院系信息添加</h1>
+    <form action="" method="POST">
+        <p>学院名称
+            <input type="text" name = "dm_name" class="form-control">
+            <span style="color: red">{{ msg }}</span>
+        </p>
+        <p>院长
+            <input type="text" name = "dm_dean" class="form-control">
+        </p>
+        <p>学院联系方式
+            <input type="text" name = "dm_phone" class="form-control">
+        </p>
+            <input type="submit" class="btn btn-danger btn-block" value="添加" >
+    <a href="{% url 'department' %}" class="btn btn-danger btn-block">返回</a>
+    </form>
+{% endblock %}

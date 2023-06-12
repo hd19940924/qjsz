@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+
+{% block content %}
+     <h1 class="text-center">院系信息编辑</h1>
+    <form action="" method="POST">
+        <p>学院名称
+            <input type="text" name = "dm_name" class="form-control" value="{{ department_obj.dm_name }}">
+        </p>
+        <p>院长
+            <input type="text" name = "dm_dean" class="form-control" value="{{ department_obj.dm_dean }}">
+        </p>
+        <p>学院联系方式
+            <input type="text" name = "dm_phone" class="form-control" value="{{ department_obj.dm_phone }}">
+        </p>
+            <input type="submit" class="btn btn-danger btn-block" value="编辑" >
+    <a href="{% url 'department' %}" class="btn btn-danger btn-block">返回</a>
+    </form>
+{% endblock %}
